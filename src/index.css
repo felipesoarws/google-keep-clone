@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+body {
+  background-color: #202124;
+}
+body header {
+  border-bottom: 1px solid #82868b;
+  padding: 0.8rem;
+}
+body header .mobile_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  visibility: visible;
+  position: relative;
+}
+@media screen and (min-width: 768px) {
+  body header .mobile_header {
+    display: none;
+    visibility: hidden;
+  }
+}
+body header .mobile_header .f-line,
+body header .mobile_header .s-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+body header .mobile_header .f-line svg,
+body header .mobile_header .s-line svg {
+  padding: 0.2rem;
+}
+body header .mobile_header .f-line .icon-menu,
+body header .mobile_header .s-line .icon-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  width: 2rem;
+  height: 2rem;
+}
+body header .mobile_header .f-line .icon-menu:hover,
+body header .mobile_header .s-line .icon-menu:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+body header .mobile_header .f-line svg {
+  color: #e8eaed;
+  font-size: 2rem;
+}
+body header .mobile_header .f-line .icon-keep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+body header .mobile_header .f-line .icon-keep h2 {
+  color: #e8eaed;
+  font-weight: 500;
+  font-size: 1.375rem;
+}
+body header .mobile_header .f-line .icon-keep img {
+  width: 2rem;
+}
+body header .mobile_header .s-line {
+  gap: 0rem;
+}
+@media (min-width: 375px) {
+  body header .mobile_header .s-line {
+    gap: 0.5rem;
+  }
+}
+body header .mobile_header .s-line .search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #525355;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.4rem;
+  position: absolute;
+  left: 0;
+  visibility: visible;
+}
+body header .mobile_header .s-line .search.disappear {
+  display: none;
+  visibility: hidden;
+}
+body header .mobile_header .s-line .search input {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  color: #e8eaed;
+}
+body header .mobile_header .s-line .search input::-moz-placeholder {
+  color: #e8eaed;
+}
+body header .mobile_header .s-line .search input::placeholder {
+  color: #e8eaed;
+}
+body header .mobile_header .s-line .icon-update,
+body header .mobile_header .s-line .icon-config,
+body header .mobile_header .s-line .icon-grid,
+body header .mobile_header .s-line .icon-search,
+body header .mobile_header .s-line .icon-back {
+  transition: all 0.3s ease-in-out;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body header .mobile_header .s-line .icon-update:hover,
+body header .mobile_header .s-line .icon-config:hover,
+body header .mobile_header .s-line .icon-grid:hover,
+body header .mobile_header .s-line .icon-search:hover,
+body header .mobile_header .s-line .icon-back:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+body header .mobile_header .s-line .icon-update svg,
+body header .mobile_header .s-line .icon-config svg {
+  color: #82868b;
+}
+body header .mobile_header .s-line svg {
+  color: #e8eaed;
+  font-size: 1.6rem;
+}
+body header .mobile_header .s-line img {
+  width: 2rem;
+  border-radius: 50%;
+}
+body header .desktop_header {
+  display: none;
+  visibility: hidden;
+}
+@media screen and (min-width: 768px) {
+  body header .desktop_header {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
+body header .desktop_header .f-line,
+body header .desktop_header .s-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+body header .desktop_header .f-line .icon-grid.accounts,
+body header .desktop_header .s-line .icon-grid.accounts {
+  margin-left: 3rem;
+}
+body header .desktop_header .f-line .icon-update,
+body header .desktop_header .f-line .icon-config,
+body header .desktop_header .f-line .icon-grid,
+body header .desktop_header .f-line .icon-search,
+body header .desktop_header .f-line .icon-grid,
+body header .desktop_header .f-line .icon-delete,
+body header .desktop_header .f-line .icon-list,
+body header .desktop_header .s-line .icon-update,
+body header .desktop_header .s-line .icon-config,
+body header .desktop_header .s-line .icon-grid,
+body header .desktop_header .s-line .icon-search,
+body header .desktop_header .s-line .icon-grid,
+body header .desktop_header .s-line .icon-delete,
+body header .desktop_header .s-line .icon-list {
+  transition: all 0.3s ease-in-out;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+body header .desktop_header .f-line .icon-update:hover,
+body header .desktop_header .f-line .icon-config:hover,
+body header .desktop_header .f-line .icon-grid:hover,
+body header .desktop_header .f-line .icon-search:hover,
+body header .desktop_header .f-line .icon-grid:hover,
+body header .desktop_header .f-line .icon-delete:hover,
+body header .desktop_header .f-line .icon-list:hover,
+body header .desktop_header .s-line .icon-update:hover,
+body header .desktop_header .s-line .icon-config:hover,
+body header .desktop_header .s-line .icon-grid:hover,
+body header .desktop_header .s-line .icon-search:hover,
+body header .desktop_header .s-line .icon-grid:hover,
+body header .desktop_header .s-line .icon-delete:hover,
+body header .desktop_header .s-line .icon-list:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+body header .desktop_header .f-line svg,
+body header .desktop_header .s-line svg {
+  padding: 0.2rem;
+}
+body header .desktop_header .f-line .icon-menu,
+body header .desktop_header .s-line .icon-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  width: 2rem;
+  height: 2rem;
+}
+body header .desktop_header .f-line .icon-menu:hover,
+body header .desktop_header .s-line .icon-menu:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+body header .desktop_header .f-line svg {
+  color: #e8eaed;
+  font-size: 2rem;
+}
+body header .desktop_header .f-line .icon-keep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+body header .desktop_header .f-line .icon-keep h2 {
+  color: #e8eaed;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+body header .desktop_header .f-line .icon-keep img {
+  width: 2rem;
+}
+body header .desktop_header .f-line .search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #525355;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.4rem;
+  margin: 0 2rem;
+}
+@media (min-width: 1024px) {
+  body header .desktop_header .f-line .search {
+    width: 30rem;
+  }
+}
+body header .desktop_header .f-line .search input {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  padding-left: 0.6rem;
+  font-size: 0.95rem;
+  color: #e8eaed;
+}
+@media (min-width: 1024px) {
+  body header .desktop_header .f-line .search input {
+    width: 30rem;
+  }
+}
+body header .desktop_header .f-line .search input::-moz-placeholder {
+  color: #e8eaed;
+}
+body header .desktop_header .f-line .search input::placeholder {
+  color: #e8eaed;
+}
+body header .desktop_header .s-line {
+  gap: 0.9rem;
+}
+body header .desktop_header .s-line .icons-grid-list .icon-grid.disappear,
+body header .desktop_header .s-line .icons-grid-list .icon-list.disappear {
+  display: none;
+  visibility: hidden;
+}
+body header .desktop_header .s-line .icon-update svg,
+body header .desktop_header .s-line .icon-config svg {
+  color: #82868b;
+}
+body header .desktop_header .s-line svg {
+  color: #e8eaed;
+  font-size: 1.7rem;
+}
+body header .desktop_header .s-line img {
+  width: 2rem;
+  border-radius: 50%;
+}
+body main {
+  height: 90vh;
+  position: relative;
+}
+body main .side_menu {
+  padding: 0.7rem;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 4rem;
+  overflow: hidden;
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+body main .side_menu.open {
+  box-shadow: 0 12px 15px 4px rgba(0, 0, 0, 0.2);
+  width: 13rem;
+  padding: 0.7rem 0;
+}
+body main .side_menu.open .itens {
+  border-radius: 0 1.4rem 1.4rem 0;
+  padding: 0 0.7rem;
+}
+body main .side_menu.open .itens:hover {
+  background-color: #28292c;
+}
+body main .side_menu.open .itens_list {
+  width: 12.9rem;
+}
+body main .side_menu.open .itens.selected {
+  background-color: #41331c;
+}
+body main .side_menu .itens_list .itens {
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding-right: 1.3rem;
+  cursor: pointer;
+}
+body main .side_menu .itens_list .itens .icon {
+  width: 2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem;
+  border-radius: 50%;
+}
+body main .side_menu .itens_list .itens .icon svg {
+  font-size: 1.4rem;
+  color: #e8eaed;
+}
+body main .side_menu .itens_list .itens .icon:hover {
+  background-color: #28292c;
+}
+body main .side_menu .itens_list .itens .icon.selected {
+  background-color: #41331c;
+}
+body main .side_menu .itens_list .itens .icon.selected:hover {
+  background-color: #41331c;
+}
+body main .side_menu .itens_list .itens .itens_name {
+  transition: all 0.3s ease-in-out;
+}
+body main .side_menu .itens_list .itens .itens_name h2 {
+  color: #e8eaed;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+}/*# sourceMappingURL=index.css.map */

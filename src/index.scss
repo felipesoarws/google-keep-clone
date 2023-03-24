@@ -1,0 +1,411 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+    width: 100%;
+}
+
+$dark-gray: #202124;
+$gray: #82868b;
+$gray-2: #525355;
+$light-gray: #e8eaed;
+$brown: #41331c;
+
+body {
+    background-color: $dark-gray;
+
+    header {
+        border-bottom: 1px solid $gray;
+        padding: 0.8rem;
+
+        .mobile_header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            visibility: visible;
+            position: relative;
+
+            @media screen and (min-width: 768px) {
+                display: none;
+                visibility: hidden;
+            }
+
+            .f-line,
+            .s-line {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.3rem;
+
+                svg {
+                    padding: 0.2rem;
+                }
+
+                .icon-menu {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease-in-out;
+                    width: 2rem;
+                    height: 2rem;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            .f-line {
+                svg {
+                    color: $light-gray;
+                    font-size: 2rem;
+                }
+
+                .icon-keep {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.3rem;
+
+                    h2 {
+                        color: $light-gray;
+                        font-weight: 500;
+                        font-size: 1.375rem;
+                    }
+
+                    img {
+                        width: 2rem;
+                    }
+                }
+            }
+
+            .s-line {
+                gap: 0rem;
+
+                @media (min-width: 375px) {
+                    gap: 0.5rem;
+                }
+
+                .search {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $gray-2;
+                    padding: 0.5rem 0.8rem;
+                    border-radius: 0.4rem;
+                    position: absolute;
+                    left: 0;
+                    visibility: visible;
+
+                    &.disappear {
+                        display: none;
+                        visibility: hidden;
+                    }
+
+                    input {
+                        background-color: transparent;
+                        border: 0;
+                        outline: 0;
+                        padding-left: 1.2rem;
+                        font-size: 0.95rem;
+                        color: $light-gray;
+
+                        &::placeholder {
+                            color: $light-gray;
+                        }
+                    }
+                }
+
+                .icon-update,
+                .icon-config,
+                .icon-grid,
+                .icon-search,
+                .icon-back {
+                    transition: all 0.3s ease-in-out;
+                    width: 2rem;
+                    height: 2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border-radius: 50%;
+                    }
+                }
+
+                .icon-update,
+                .icon-config {
+                    svg {
+                        color: $gray;
+                    }
+                }
+
+                svg {
+                    color: $light-gray;
+                    font-size: 1.6rem;
+                }
+
+                img {
+                    width: 2rem;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .desktop_header {
+            display: none;
+            visibility: hidden;
+
+            @media screen and (min-width: 768px) {
+                visibility: visible;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 2rem;
+            }
+
+            .f-line,
+            .s-line {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+
+                .icon-grid.accounts {
+                    margin-left: 3rem;
+                }
+
+                .icon-update,
+                .icon-config,
+                .icon-grid,
+                .icon-search,
+                .icon-grid,
+                .icon-delete,
+                .icon-list {
+                    transition: all 0.3s ease-in-out;
+                    width: 2rem;
+                    height: 2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border-radius: 50%;
+                    }
+                }
+
+                svg {
+                    padding: 0.2rem;
+                }
+
+                .icon-menu {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease-in-out;
+                    width: 2rem;
+                    height: 2rem;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            .f-line {
+                svg {
+                    color: $light-gray;
+                    font-size: 2rem;
+                }
+
+                .icon-keep {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.3rem;
+
+                    h2 {
+                        color: $light-gray;
+                        font-weight: 500;
+                        font-size: 1.2rem;
+                    }
+
+                    img {
+                        width: 2rem;
+                    }
+                }
+
+                .search {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $gray-2;
+                    padding: 0.5rem 0.8rem;
+                    border-radius: 0.4rem;
+                    margin: 0 2rem;
+
+                    @media (min-width: 1024px) {
+                        width: 30rem;
+                    }
+
+                    input {
+                        background-color: transparent;
+                        border: 0;
+                        outline: 0;
+                        padding-left: 0.6rem;
+                        font-size: 0.95rem;
+                        color: $light-gray;
+
+                        @media (min-width: 1024px) {
+                            width: 30rem;
+                        }
+
+                        &::placeholder {
+                            color: $light-gray;
+                        }
+                    }
+                }
+            }
+
+            .s-line {
+                gap: 0.9rem;
+
+                .icons-grid-list {
+                    .icon-grid,
+                    .icon-list {
+                        &.disappear {
+                            display: none;
+                            visibility: hidden;
+                        }
+                    }
+                }
+
+                .icon-update,
+                .icon-config {
+                    svg {
+                        color: $gray;
+                    }
+                }
+
+                svg {
+                    color: $light-gray;
+                    font-size: 1.7rem;
+                }
+
+                img {
+                    width: 2rem;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    main {
+        height: 90vh;
+        position: relative;
+
+        .side_menu {
+            padding: 0.7rem;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            width: 4rem;
+            overflow: hidden;
+            position: absolute;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s ease-in-out;
+
+            &.open {
+                box-shadow: 0 12px 15px 4px rgba($color: #000000, $alpha: 0.2);
+                width: 13rem;
+                padding: 0.7rem 0;
+            }
+
+            &.open .itens {
+                border-radius: 0 1.4rem 1.4rem 0;
+                padding: 0 0.7rem;
+
+                &:hover {
+                    background-color: #28292c;
+                }
+            }
+
+            &.open .itens_list {
+                width: 12.9rem;
+            }
+
+            &.open .itens.selected {
+                background-color: $brown;
+            }
+
+            .itens_list {
+                .itens {
+                    transition: all 0.3s ease-in-out;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 2rem;
+                    padding-right: 1.3rem;
+                    cursor: pointer;
+
+                    .icon {
+                        width: 2rem 2rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0.7rem;
+                        border-radius: 50%;
+
+                        svg {
+                            font-size: 1.4rem;
+                            color: $light-gray;
+                        }
+
+                        &:hover {
+                            background-color: #28292c;
+                        }
+
+                        &.selected {
+                            background-color: $brown;
+
+                            &:hover {
+                                background-color: $brown;
+                            }
+                        }
+                    }
+
+                    .itens_name {
+                        transition: all 0.3s ease-in-out;
+
+                        h2 {
+                            color: $light-gray;
+                            font-size: 0.875rem;
+                            font-weight: 600;
+                            font-family: "Open Sans", sans-serif;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
