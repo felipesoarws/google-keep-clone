@@ -19,6 +19,7 @@ body {
 body header {
   border-bottom: 1px solid #82868b;
   padding: 0.8rem;
+  height: 9vh;
 }
 body header .mobile_header {
   display: flex;
@@ -109,6 +110,9 @@ body header .mobile_header .s-line .search input {
   color: #e8eaed;
 }
 body header .mobile_header .s-line .search input::-moz-placeholder {
+  color: #e8eaed;
+}
+body header .mobile_header .s-line .search input:-ms-input-placeholder {
   color: #e8eaed;
 }
 body header .mobile_header .s-line .search input::placeholder {
@@ -275,6 +279,9 @@ body header .desktop_header .f-line .search input {
 body header .desktop_header .f-line .search input::-moz-placeholder {
   color: #e8eaed;
 }
+body header .desktop_header .f-line .search input:-ms-input-placeholder {
+  color: #e8eaed;
+}
 body header .desktop_header .f-line .search input::placeholder {
   color: #e8eaed;
 }
@@ -299,10 +306,11 @@ body header .desktop_header .s-line img {
   border-radius: 50%;
 }
 body main {
-  height: 90vh;
+  height: 91vh;
   position: relative;
 }
 body main .side_menu {
+  z-index: 1000;
   padding: 0.7rem;
   left: 0;
   bottom: 0;
@@ -319,7 +327,7 @@ body main .side_menu {
 }
 body main .side_menu.open {
   box-shadow: 0 12px 15px 4px rgba(0, 0, 0, 0.2);
-  width: 13rem;
+  width: 16rem;
   padding: 0.7rem 0;
 }
 body main .side_menu.open .itens {
@@ -330,7 +338,7 @@ body main .side_menu.open .itens:hover {
   background-color: #28292c;
 }
 body main .side_menu.open .itens_list {
-  width: 12.9rem;
+  width: 16rem;
 }
 body main .side_menu.open .itens.selected {
   background-color: #41331c;
@@ -374,4 +382,10 @@ body main .side_menu .itens_list .itens .itens_name h2 {
   font-size: 0.875rem;
   font-weight: 600;
   font-family: "Open Sans", sans-serif;
+}
+body main .notes {
+  z-index: -1;
+}
+body main .notes_creator {
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
 }/*# sourceMappingURL=index.css.map */

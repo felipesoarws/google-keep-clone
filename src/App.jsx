@@ -9,6 +9,7 @@ import {
   BiGridAlt,
   BiArrowBack,
   BiTrash,
+  BiBell,BiPencil,BiArchiveIn
 } from "react-icons/bi";
 import { BsArrowClockwise, BsFillGrid3X3GapFill } from "react-icons/bs";
 import { CiGrid2H } from "react-icons/ci";
@@ -174,6 +175,35 @@ function App() {
                 <h2>Notas</h2>
               </div>
             </div>
+          
+
+            <div className="itens remind">
+              <div className="icon">
+                <BiBell />
+              </div>
+              <div className="itens_name">
+                <h2>Lembretes</h2>
+              </div>
+            </div>
+
+            <div className="itens edit_marks">
+              <div className="icon">
+                <BiPencil />
+              </div>
+              <div className="itens_name">
+                <h2>Editar marcadores</h2>
+              </div>
+            </div>
+
+            <div className="itens archive">
+              <div className="icon">
+                <BiArchiveIn />
+              </div>
+              <div className="itens_name">
+                <h2>Arquivo</h2>
+              </div>
+            </div>
+
             <div className="itens trash">
               <div className="icon">
                 <BiTrash />
@@ -182,6 +212,14 @@ function App() {
                 <h2>Lixeira</h2>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="notes">
+          <div className="notes_creator">
+            <input type="text" placeholder="Criar uma nota..." />
+          </div>
+          <div className="notes_list">
+
           </div>
         </div>
       </main>

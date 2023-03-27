@@ -26,6 +26,7 @@ body {
     header {
         border-bottom: 1px solid $gray;
         padding: 0.8rem;
+        height: 9vh;
 
         .mobile_header {
             display: flex;
@@ -316,10 +317,11 @@ body {
     }
 
     main {
-        height: 90vh;
+        height: 91vh;
         position: relative;
 
         .side_menu {
+            z-index: 1000;
             padding: 0.7rem;
             left: 0;
             bottom: 0;
@@ -336,7 +338,7 @@ body {
 
             &.open {
                 box-shadow: 0 12px 15px 4px rgba($color: #000000, $alpha: 0.2);
-                width: 13rem;
+                width: 16rem;
                 padding: 0.7rem 0;
             }
 
@@ -350,7 +352,7 @@ body {
             }
 
             &.open .itens_list {
-                width: 12.9rem;
+                width: 16rem;
             }
 
             &.open .itens.selected {
@@ -405,6 +407,14 @@ body {
                         }
                     }
                 }
+            }
+        }
+
+        .notes {
+            z-index:-1;
+
+            &_creator {
+                box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
             }
         }
     }
