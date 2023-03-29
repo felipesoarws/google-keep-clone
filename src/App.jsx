@@ -6,7 +6,7 @@ import { BsArrowClockwise, BsFillGrid3X3GapFill } from "react-icons/bs";
 import { CiGrid2H } from "react-icons/ci";
 import { FiX } from "react-icons/fi";
 import { MdChecklistRtl, MdOutlineColorLens } from "react-icons/md";
-import { BsFillPinFill } from "react-icons/bs";
+import { BsFillPinFill, BsPin } from "react-icons/bs";
 
 // images
 import google_keep_img from "./assets/icon.png";
@@ -16,6 +16,8 @@ import profile_img from "./assets/me.jpeg";
 import "./App.css";
 
 function App() {
+  const [reducerValue, forceUptade] = useReducer((x) => x + 1, 0);
+
   const searchMobileMenu = useRef(null);
   const searchInputMobileMenu = useRef(null);
   const searchInputDesktopMenu = useRef(null);
@@ -24,8 +26,13 @@ function App() {
   const notesDescInput = useRef(null);
   const notesTitleInput = useRef(null);
   const notesMenu = useRef(null);
+  const notesMenuList = useRef(null);
   const notesMenuDetailed = useRef(null);
   const notesList = useRef(null);
+  const notesList_1 = useRef(null);
+  const notesContainer = useRef(null);
+  const notesPinnedList = useRef(null);
+  const notesNotPinnedList = useRef(null);
 
   const [notes, setNotes] = useState([
     {
@@ -36,11 +43,21 @@ function App() {
     },
   ]);
 
-  const [reducerValue, forceUptade] = useReducer((x) => x + 1, 0);
+  const [pinnedNotes, setPinnedNotes] = useState([]);
+  const [notPinnedNotes, setNotPinnedNotes] = useState([]);
 
   useEffect(() => {
     setNotes(notes);
+    updateNotes();
   }, [reducerValue]);
+
+  const updateNotes = () => {
+    const pinned = notes.filter((n) => n.pin == true);
+    const notPinned = notes.filter((n) => n.pin != true);
+
+    setPinnedNotes(pinned);
+    setNotPinnedNotes(notPinned);
+  };
 
   const pinNote = (e) => {
     const idNoteElement = e.target.parentElement;
@@ -53,10 +70,11 @@ function App() {
     }
 
     setNotes(notes);
+    updateNotes();
     forceUptade();
   };
 
-  const uptadeNotes = (title, desc, pin) => {
+  const createNotes = (title, desc, pin) => {
     const update = [
       ...notes,
       {
@@ -85,10 +103,42 @@ function App() {
     forceUptade();
   };
 
+  const gridView = () => {
+    notesList.current.classList.remove("list_view");
+    notesList_1.current.classList.remove("list_view");
+    notesContainer.current.classList.remove("list_view");
+    notesMenuList.current.classList.remove("list_view");
+    notesPinnedList.current.classList.remove("list_view");
+    notesNotPinnedList.current.classList.remove("list_view");
+
+    notesPinnedList.current.classList.add("grid_view");
+    notesNotPinnedList.current.classList.add("grid_view");
+    notesMenuList.current.classList.add("grid_view");
+    notesContainer.current.classList.add("grid_view");
+    notesList.current.classList.add("grid_view");
+    notesList_1.current.classList.add("grid_view");
+  };
+
+  const listView = () => {
+    notesList.current.classList.add("list_view");
+    notesList_1.current.classList.add("list_view");
+    notesContainer.current.classList.add("list_view");
+    notesMenuList.current.classList.add("list_view");
+    notesPinnedList.current.classList.add("list_view");
+    notesNotPinnedList.current.classList.add("list_view");
+
+    notesPinnedList.current.classList.remove("grid_view");
+    notesNotPinnedList.current.classList.remove("grid_view");
+    notesMenuList.current.classList.remove("grid_view");
+    notesContainer.current.classList.remove("grid_view");
+    notesList.current.classList.remove("grid_view");
+    notesList_1.current.classList.remove("grid_view");
+  };
+
   const toggleNotesMenu = () => {
     notesMenu.current.classList.toggle("disappear");
     notesMenuDetailed.current.classList.toggle("show");
-    notesList.current.classList.toggle("margin");
+    notesMenuList.current.classList.toggle("margin");
 
     let title = notesTitleInput.current.value;
     let desc = notesDescInput.current.value;
@@ -96,8 +146,8 @@ function App() {
     let descInputLength = notesDescInput.current.value.length;
     let titleInputLength = notesTitleInput.current.value.length;
 
-    if (descInputLength > 1 || titleInputLength > 1) {
-      uptadeNotes(title, desc);
+    if (descInputLength > 0 || titleInputLength > 0) {
+      createNotes(title, desc);
     }
 
     notesDescInput.current.value = "";
@@ -216,8 +266,8 @@ function App() {
         </div>
       </header>
       <main className="main">
-        <div className="notes">
-          <div className="notes_creator">
+        <div className="notes list_view">
+          <div className="notes_creator" ref={notesContainer}>
             <form ref={notesMenu}>
               <input
                 type="text"
@@ -255,12 +305,13 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="notes_menu" ref={notesList}>
-            <div className="notes_menu_pinned">
+          <div className="notes_menu list_view" ref={notesMenuList}>
+            <div className="notes_menu_pinned list_view" ref={notesPinnedList}>
               <div className="notes_pin_title">
-                <h1>Marcadas</h1>
+                {pinnedNotes.length < 1 && <h1></h1>}
+                {pinnedNotes.length > 0 && <h1>Marcadas</h1>}
               </div>
-              <div className="list_view notes_list">
+              <div className="list_view notes_list" ref={notesList}>
                 {notes.map((item) => {
                   if (item.pin)
                     return (
@@ -285,25 +336,26 @@ function App() {
                 })}
               </div>
             </div>
-            <div className="notes_menu_not_pinned">
+            <div
+              className="notes_menu_not_pinned list_view"
+              ref={notesNotPinnedList}
+            >
               <div className="notes_pin_title">
-                <h1>Outras</h1>
+                {notPinnedNotes.length > 0 && <h1>Outras</h1>}
+                {notPinnedNotes.length < 1 && <h1></h1>}
               </div>
-              <div className="list_view notes_list" ref={notesList}>
+              <div className="list_view notes_list" ref={notesList_1}>
                 {notes.map((item) => {
                   if (!item.pin)
                     return (
-                      <div
-                        className={item.id + " note list_view"}
-                        key={item.id}
-                      >
+                      <div className={item.id + " note "} key={item.id}>
                         <div className={item.id + " title"}>
                           <h1>{item.title}</h1>
                           <div
                             className={item.id + " note_fixer"}
                             onClick={pinNote}
                           >
-                            <BsFillPinFill />
+                            <BsPin />
                           </div>
                         </div>
                         <div className="desc">

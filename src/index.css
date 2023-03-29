@@ -328,6 +328,9 @@ body main .notes {
   justify-content: center;
   flex-direction: column;
 }
+body main .notes.list_view {
+  width: 21.3rem;
+}
 body main .notes_creator {
   position: relative;
   width: 100%;
@@ -461,8 +464,14 @@ body main .notes_menu {
   flex-direction: column;
   gap: 2rem;
 }
+body main .notes_menu.list_view {
+  width: 21.3rem;
+}
+body main .notes_menu.grid_view {
+  width: 100%;
+}
 body main .notes_menu.margin {
-  margin-top: 11rem;
+  margin-top: 8rem;
 }
 body main .notes_menu .notes_pin_title h1 {
   color: #82868b;
@@ -471,14 +480,61 @@ body main .notes_menu .notes_pin_title h1 {
   margin: 1rem 0;
 }
 body main .notes_menu_pinned, body main .notes_menu_not_pinned {
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  body main .notes_menu_pinned.grid_view, body main .notes_menu_not_pinned.grid_view {
+    min-width: 60rem;
+  }
+}
+@media (min-width: 1200px) {
+  body main .notes_menu_pinned.grid_view, body main .notes_menu_not_pinned.grid_view {
+    min-width: 77.375rem;
+  }
+}
+@media (min-width: 1440px) {
+  body main .notes_menu_pinned.grid_view, body main .notes_menu_not_pinned.grid_view {
+    min-width: 77.375rem;
+  }
+}
+body main .notes_menu_pinned.list_view {
+  width: 21.3rem;
+}
+body main .notes_menu_not_pinned.list_view {
   width: 21.3rem;
 }
 body main .notes_list {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column-reverse;
   gap: 2rem;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+body main .notes_list.list_view {
+  flex-direction: column-reverse;
+  width: 21.3rem;
+}
+body main .notes_list.grid_view {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 100%;
+}
+body main .notes_list.grid_view .note {
+  width: 15rem;
+}
+body main .notes_list.grid_view .note .title {
+  width: 13rem;
+}
+body main .notes_list.grid_view .note .desc {
+  width: 13rem;
+}
+body main .notes_list.grid_view .note h1 {
+  width: 13rem;
+}
+body main .notes_list.grid_view .note p {
+  width: 13rem;
 }
 body main .notes_list .note {
   background-color: transparent;

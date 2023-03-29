@@ -344,6 +344,10 @@ body {
             justify-content: center;
             flex-direction: column;
 
+            &.list_view {
+                width: 21.3rem;
+            }
+
             &_creator {
                 position: relative;
                 width: 100%;
@@ -417,9 +421,6 @@ body {
                         visibility: visible;
                     }
 
-                    //background-color: #5c2b29;
-                    //border-color: #5c2b29;
-
                     @media (min-width: 768px) {
                         width: 30rem;
                     }
@@ -489,8 +490,16 @@ body {
                 flex-direction: column;
                 gap: 2rem;
 
+                &.list_view {
+                    width: 21.3rem;
+                }
+
+                &.grid_view {
+                    width: 100%;
+                }
+
                 &.margin {
-                    margin-top: 11rem;
+                    margin-top: 8rem;
                 }
 
                 .notes_pin_title h1 {
@@ -502,6 +511,29 @@ body {
 
                 &_pinned,
                 &_not_pinned {
+                    width: 100%;
+                }
+
+                &_pinned.grid_view,
+                &_not_pinned.grid_view {
+                    @media (min-width: 1024px) {
+                        min-width: 60rem;
+                    }
+
+                    @media (min-width: 1200px) {
+                        min-width: 77.375rem;
+                    }
+
+                    @media (min-width: 1440px) {
+                        min-width: 77.375rem;
+                    }
+                }
+
+                &_pinned.list_view {
+                    width: 21.3rem;
+                }
+
+                &_not_pinned.list_view {
                     width: 21.3rem;
                 }
             }
@@ -510,8 +542,41 @@ body {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                flex-direction: column-reverse;
                 gap: 2rem;
+                transition: all 0.3s ease-in-out;
+                width: 100%;
+
+                &.list_view {
+                    flex-direction: column-reverse;
+                    width: 21.3rem;
+                }
+
+                &.grid_view {
+                    flex-direction: row-reverse;
+                    justify-content: flex-end;
+                    flex-wrap: wrap;
+                    width: 100%;
+                }
+
+                &.grid_view .note {
+                    width: 15rem;
+                }
+
+                &.grid_view .note .title {
+                    width: 13rem;
+                }
+
+                &.grid_view .note .desc {
+                    width: 13rem;
+                }
+
+                &.grid_view .note h1 {
+                    width: 13rem;
+                }
+
+                &.grid_view .note p {
+                    width: 13rem;
+                }
 
                 .note {
                     background-color: transparent;
