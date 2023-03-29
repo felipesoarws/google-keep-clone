@@ -13,13 +13,28 @@ img {
   width: 100%;
 }
 
+input {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 100%;
+  color: #e8eaed;
+  font-weight: 600;
+  font-size: 1rem;
+}
+input::-moz-placeholder {
+  color: #e8eaed;
+}
+input::placeholder {
+  color: #e8eaed;
+}
+
 body {
   background-color: #202124;
 }
 body header {
   border-bottom: 1px solid #82868b;
   padding: 0.8rem;
-  height: 9vh;
 }
 body header .mobile_header {
   display: flex;
@@ -110,9 +125,6 @@ body header .mobile_header .s-line .search input {
   color: #e8eaed;
 }
 body header .mobile_header .s-line .search input::-moz-placeholder {
-  color: #e8eaed;
-}
-body header .mobile_header .s-line .search input:-ms-input-placeholder {
   color: #e8eaed;
 }
 body header .mobile_header .s-line .search input::placeholder {
@@ -279,9 +291,6 @@ body header .desktop_header .f-line .search input {
 body header .desktop_header .f-line .search input::-moz-placeholder {
   color: #e8eaed;
 }
-body header .desktop_header .f-line .search input:-ms-input-placeholder {
-  color: #e8eaed;
-}
 body header .desktop_header .f-line .search input::placeholder {
   color: #e8eaed;
 }
@@ -306,86 +315,226 @@ body header .desktop_header .s-line img {
   border-radius: 50%;
 }
 body main {
-  height: 91vh;
-  position: relative;
-}
-body main .side_menu {
-  z-index: 1000;
-  padding: 0.7rem;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  width: 4rem;
-  overflow: hidden;
-  position: absolute;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 1rem;
-  transition: all 0.3s ease-in-out;
-}
-body main .side_menu.open {
-  box-shadow: 0 12px 15px 4px rgba(0, 0, 0, 0.2);
-  width: 16rem;
-  padding: 0.7rem 0;
-}
-body main .side_menu.open .itens {
-  border-radius: 0 1.4rem 1.4rem 0;
-  padding: 0 0.7rem;
-}
-body main .side_menu.open .itens:hover {
-  background-color: #28292c;
-}
-body main .side_menu.open .itens_list {
-  width: 16rem;
-}
-body main .side_menu.open .itens.selected {
-  background-color: #41331c;
-}
-body main .side_menu .itens_list .itens {
-  transition: all 0.3s ease-in-out;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-  padding-right: 1.3rem;
-  cursor: pointer;
-}
-body main .side_menu .itens_list .itens .icon {
-  width: 2rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.7rem;
-  border-radius: 50%;
-}
-body main .side_menu .itens_list .itens .icon svg {
-  font-size: 1.4rem;
-  color: #e8eaed;
-}
-body main .side_menu .itens_list .itens .icon:hover {
-  background-color: #28292c;
-}
-body main .side_menu .itens_list .itens .icon.selected {
-  background-color: #41331c;
-}
-body main .side_menu .itens_list .itens .icon.selected:hover {
-  background-color: #41331c;
-}
-body main .side_menu .itens_list .itens .itens_name {
-  transition: all 0.3s ease-in-out;
-}
-body main .side_menu .itens_list .itens .itens_name h2 {
-  color: #e8eaed;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: "Open Sans", sans-serif;
+  flex-direction: column;
+  margin: 2rem;
 }
 body main .notes {
-  z-index: -1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 body main .notes_creator {
+  position: relative;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  body main .notes_creator {
+    width: 30rem;
+  }
+}
+body main .notes_creator form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #5f6368;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  visibility: visible;
+}
+body main .notes_creator form.disappear {
+  display: none;
+  visibility: hidden;
+}
+body main .notes_creator form input {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 100%;
+  color: #e8eaed;
+  font-weight: 600;
+  font-size: 1rem;
+}
+body main .notes_creator form input::-moz-placeholder {
+  color: #e8eaed;
+}
+body main .notes_creator form input::placeholder {
+  color: #e8eaed;
+}
+body main .notes_creator form svg {
+  color: #e8eaed;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+body main .notes_creator form svg:hover {
+  color: white;
+}
+body main .notes_creator_detailed {
+  width: 100%;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #5f6368;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  gap: 1.2rem;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  top: 0;
+  display: none;
+  visibility: hidden;
+}
+body main .notes_creator_detailed.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  visibility: visible;
+}
+@media (min-width: 768px) {
+  body main .notes_creator_detailed {
+    width: 30rem;
+  }
+}
+body main .notes_creator_detailed .f-line,
+body main .notes_creator_detailed .s-line,
+body main .notes_creator_detailed .t-line {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body main .notes_creator_detailed .f-line svg,
+body main .notes_creator_detailed .s-line svg,
+body main .notes_creator_detailed .t-line svg {
+  color: #e8eaed;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+body main .notes_creator_detailed .f-line svg:hover,
+body main .notes_creator_detailed .s-line svg:hover,
+body main .notes_creator_detailed .t-line svg:hover {
+  color: white;
+}
+body main .notes_creator_detailed .f-line input::-moz-placeholder, body main .notes_creator_detailed .s-line input::-moz-placeholder, body main .notes_creator_detailed .t-line input::-moz-placeholder {
+  color: #82868b;
+}
+body main .notes_creator_detailed .f-line input::placeholder,
+body main .notes_creator_detailed .s-line input::placeholder,
+body main .notes_creator_detailed .t-line input::placeholder {
+  color: #82868b;
+}
+body main .notes_creator_detailed .s-line input {
+  font-size: 0.9rem;
+}
+body main .notes_creator_detailed .t-line {
+  margin-top: 0.7rem;
+}
+body main .notes_creator_detailed .t-line button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 100%;
+  color: #e8eaed;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+body main .notes_creator_detailed .t-line button:hover {
+  color: white;
+}
+body main .notes_creator_detailed .t-line svg {
+  font-size: 1.1rem;
+}
+body main .notes_menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+body main .notes_menu.margin {
+  margin-top: 11rem;
+}
+body main .notes_menu .notes_pin_title h1 {
+  color: #82868b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 1rem 0;
+}
+body main .notes_menu_pinned, body main .notes_menu_not_pinned {
+  width: 21.3rem;
+}
+body main .notes_list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  gap: 2rem;
+}
+body main .notes_list .note {
+  background-color: transparent;
+  border: 1px solid #5f6368;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 21.3rem;
+  min-height: 6.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0.7rem;
+  overflow-wrap: break-word;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+}
+body main .notes_list .note .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+body main .notes_list .note .title svg {
+  color: #e8eaed;
+  font-size: 1.3rem;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+body main .notes_list .note .title svg:hover {
+  color: white;
+}
+body main .notes_list .note .note_fixer {
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body main .notes_list .note .note_fixer svg {
+  z-index: -1;
+}
+body main .notes_list .note .title,
+body main .notes_list .note .desc,
+body main .notes_list .note h1,
+body main .notes_list .note p {
+  width: 19.2rem;
+}
+body main .notes_list .note h1,
+body main .notes_list .note p {
+  display: block;
+}
+body main .notes_list .note h1 {
+  color: #e8eaed;
+  font-size: 1rem;
+}
+body main .notes_list .note p {
+  color: #e8eaed;
+  font-size: 0.9rem;
 }/*# sourceMappingURL=index.css.map */

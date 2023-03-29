@@ -1,20 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState, useReducer, useEffect } from "react";
 
 // icons
-
-import {
-  BiMenu,
-  BiSearchAlt2,
-  BiCog,
-  BiGridAlt,
-  BiArrowBack,
-  BiTrash,
-  BiBell,BiPencil,BiArchiveIn
-} from "react-icons/bi";
+import { BiSearchAlt2, BiCog, BiGridAlt, BiArrowBack } from "react-icons/bi";
 import { BsArrowClockwise, BsFillGrid3X3GapFill } from "react-icons/bs";
 import { CiGrid2H } from "react-icons/ci";
 import { FiX } from "react-icons/fi";
-import { FaRegLightbulb } from "react-icons/fa";
+import { MdChecklistRtl, MdOutlineColorLens } from "react-icons/md";
+import { BsFillPinFill } from "react-icons/bs";
 
 // images
 import google_keep_img from "./assets/icon.png";
@@ -29,23 +21,88 @@ function App() {
   const searchInputDesktopMenu = useRef(null);
   const iconGridView = useRef(null);
   const iconListView = useRef(null);
-  const sideMenu = useRef(null);
+  const notesDescInput = useRef(null);
+  const notesTitleInput = useRef(null);
+  const notesMenu = useRef(null);
+  const notesMenuDetailed = useRef(null);
+  const notesList = useRef(null);
+
+  const [notes, setNotes] = useState([
+    {
+      id: 1,
+      title: "teste",
+      desc: "teste",
+      pin: false,
+    },
+  ]);
+
+  const [reducerValue, forceUptade] = useReducer((x) => x + 1, 0);
+
+  useEffect(() => {
+    setNotes(notes);
+  }, [reducerValue]);
+
+  const pinNote = (e) => {
+    const idNoteElement = e.target.parentElement;
+    const noteContent = notes[idNoteElement.classList[0] - 1];
+
+    if (noteContent.pin) {
+      noteContent.pin = false;
+    } else {
+      noteContent.pin = true;
+    }
+
+    setNotes(notes);
+    forceUptade();
+  };
+
+  const uptadeNotes = (title, desc, pin) => {
+    const update = [
+      ...notes,
+      {
+        id: notes.length + 1,
+        title: title,
+        desc: desc,
+        pin: pin,
+      },
+    ];
+
+    setNotes(update);
+  };
 
   const showListView = () => {
     iconListView.current.classList.add("disappear");
     iconGridView.current.classList.remove("disappear");
 
     listView();
+    forceUptade();
   };
   const showGridView = () => {
     iconGridView.current.classList.add("disappear");
     iconListView.current.classList.remove("disappear");
 
     gridView();
+    forceUptade();
   };
 
-  const toggleSideMenu = () => {
-    sideMenu.current.classList.toggle("open");
+  const toggleNotesMenu = () => {
+    notesMenu.current.classList.toggle("disappear");
+    notesMenuDetailed.current.classList.toggle("show");
+    notesList.current.classList.toggle("margin");
+
+    let title = notesTitleInput.current.value;
+    let desc = notesDescInput.current.value;
+
+    let descInputLength = notesDescInput.current.value.length;
+    let titleInputLength = notesTitleInput.current.value.length;
+
+    if (descInputLength > 1 || titleInputLength > 1) {
+      uptadeNotes(title, desc);
+    }
+
+    notesDescInput.current.value = "";
+    notesTitleInput.current.value = "";
+    return;
   };
 
   const openSearchMenu = () => {
@@ -67,9 +124,6 @@ function App() {
       <header>
         <div className="mobile_header">
           <div className="f-line">
-            <div className="icon-menu" onClick={() => toggleSideMenu()}>
-              <BiMenu />
-            </div>
             <div className="icon-keep">
               <img src={google_keep_img} alt="" />
               <h2>Keep</h2>
@@ -110,9 +164,6 @@ function App() {
 
         <div className="desktop_header">
           <div className="f-line">
-            <div className="icon-menu" onClick={() => toggleSideMenu()}>
-              <BiMenu />
-            </div>
             <div className="icon-keep">
               <img src={google_keep_img} alt="" />
               <h2>Keep</h2>
@@ -165,61 +216,104 @@ function App() {
         </div>
       </header>
       <main className="main">
-        <div className="side_menu" ref={sideMenu}>
-          <div className="itens_list">
-            <div className="itens notes selected">
-              <div className="icon selected ">
-                <FaRegLightbulb />
-              </div>
-              <div className="itens_name">
-                <h2>Notas</h2>
-              </div>
-            </div>
-          
-
-            <div className="itens remind">
-              <div className="icon">
-                <BiBell />
-              </div>
-              <div className="itens_name">
-                <h2>Lembretes</h2>
-              </div>
-            </div>
-
-            <div className="itens edit_marks">
-              <div className="icon">
-                <BiPencil />
-              </div>
-              <div className="itens_name">
-                <h2>Editar marcadores</h2>
-              </div>
-            </div>
-
-            <div className="itens archive">
-              <div className="icon">
-                <BiArchiveIn />
-              </div>
-              <div className="itens_name">
-                <h2>Arquivo</h2>
-              </div>
-            </div>
-
-            <div className="itens trash">
-              <div className="icon">
-                <BiTrash />
-              </div>
-              <div className="itens_name">
-                <h2>Lixeira</h2>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="notes">
           <div className="notes_creator">
-            <input type="text" placeholder="Criar uma nota..." />
-          </div>
-          <div className="notes_list">
+            <form ref={notesMenu}>
+              <input
+                type="text"
+                placeholder="Criar uma nota..."
+                onClick={() => toggleNotesMenu()}
+              />
+              <MdChecklistRtl />
+            </form>
+            <div className="notes_creator_detailed" ref={notesMenuDetailed}>
+              <div className="f-line">
+                <div className="note_title">
+                  <input
+                    type="text"
+                    placeholder="Título"
+                    ref={notesTitleInput}
+                  />
+                </div>
+                <div className="note_fixer">
+                  <BsFillPinFill />
+                </div>
+              </div>
 
+              <div className="s-line">
+                <input
+                  type="text"
+                  placeholder="Criar uma nota..."
+                  ref={notesDescInput}
+                />
+              </div>
+              <div className="t-line">
+                <MdOutlineColorLens />
+                <div className="clone-note">
+                  <button onClick={(e) => toggleNotesMenu(this)}>Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="notes_menu" ref={notesList}>
+            <div className="notes_menu_pinned">
+              <div className="notes_pin_title">
+                <h1>Marcadas</h1>
+              </div>
+              <div className="list_view notes_list">
+                {notes.map((item) => {
+                  if (item.pin)
+                    return (
+                      <div
+                        className={item.id + " note list_view"}
+                        key={item.id}
+                      >
+                        <div className={item.id + " title"}>
+                          <h1>{item.title}</h1>
+                          <div
+                            className={item.id + " note_fixer"}
+                            onClick={pinNote}
+                          >
+                            <BsFillPinFill />
+                          </div>
+                        </div>
+                        <div className="desc">
+                          <p>{item.desc}</p>
+                        </div>
+                      </div>
+                    );
+                })}
+              </div>
+            </div>
+            <div className="notes_menu_not_pinned">
+              <div className="notes_pin_title">
+                <h1>Outras</h1>
+              </div>
+              <div className="list_view notes_list" ref={notesList}>
+                {notes.map((item) => {
+                  if (!item.pin)
+                    return (
+                      <div
+                        className={item.id + " note list_view"}
+                        key={item.id}
+                      >
+                        <div className={item.id + " title"}>
+                          <h1>{item.title}</h1>
+                          <div
+                            className={item.id + " note_fixer"}
+                            onClick={pinNote}
+                          >
+                            <BsFillPinFill />
+                          </div>
+                        </div>
+                        <div className="desc">
+                          <p>{item.desc}</p>
+                        </div>
+                      </div>
+                    );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </main>
