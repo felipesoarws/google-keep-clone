@@ -50,8 +50,11 @@ function App() {
 
   useEffect(() => {
     setNotes(notes);
+    updateLocalStorage();
     updateNotes();
   }, [reducerValue]);
+
+  const updateLocalStorage = () => {};
 
   const updateNotes = () => {
     const pinned = notes.filter((n) => n.pin == true);
@@ -71,19 +74,19 @@ function App() {
     }
 
     setNotes(notes);
+    updateLocalStorage();
     updateNotes();
     forceUpdate();
   };
 
-  const createNotes = (title, desc, pin, type) => {
-    const update = [
+  const createNotes = (title, desc, pin) => {
+    let update = [
       ...notes,
       {
-        id: notes.length + 1,
+        id: notes.length++,
         title: title,
         desc: desc,
         pin: pin,
-        type: type,
       },
     ];
 
@@ -110,7 +113,7 @@ function App() {
     iconListView.current.classList.remove("disappear");
 
     gridView();
-    forceUptade();
+    forceUpdate();
   };
 
   const toggleNotesListMenu = () => {
@@ -125,7 +128,7 @@ function App() {
     let titleInputLength = notesTitleInput.current.value.length;
 
     if (descInputLength > 0 || titleInputLength > 0) {
-      createNotes(title, desc, false, "task");
+      createNotes(title, desc, false);
     }
 
     notesDescInput.current.value = "";
