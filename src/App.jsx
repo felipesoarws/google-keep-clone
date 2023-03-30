@@ -43,38 +43,58 @@ function App() {
 
   const [search, setSearch] = useState("");
 
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([
+    {
+      id: 0,
+      title: "teste",
+      desc: "teste",
+      pin: true,
+    },
+  ]);
 
   const [pinnedNotes, setPinnedNotes] = useState([]);
   const [notPinnedNotes, setNotPinnedNotes] = useState([]);
+  const [notesFromLocalStorage, setNotesFromLocalStorage] = useState([]);
 
   useEffect(() => {
-    setNotes(notes);
     updateLocalStorage();
+    setNotes(notesFromLocalStorage);
     updateNotes();
   }, [reducerValue]);
 
-  const updateLocalStorage = () => {};
+  const updateLocalStorage = (i) => {
+    if (i == undefined) {
+      localStorage.setItem("notes", JSON.stringify(notes));
+      const LocalStorageNotes = JSON.parse(localStorage.getItem("notes"));
+
+      setNotesFromLocalStorage(LocalStorageNotes);
+    } else {
+      const LocalStorageNotes = JSON.parse(localStorage.getItem("notes"));
+      localStorage.setItem("notes", JSON.stringify(i));
+
+      setNotesFromLocalStorage(LocalStorageNotes);
+    }
+  };
 
   const updateNotes = () => {
     const pinned = notes.filter((n) => n.pin == true);
     const notPinned = notes.filter((n) => n.pin != true);
 
+    setNotes(notes);
     setPinnedNotes(pinned);
     setNotPinnedNotes(notPinned);
   };
 
   const pinNote = (id) => {
-    const noteContent = notes[id - 1];
+    const note = notes[id];
 
-    if (noteContent.pin) {
-      noteContent.pin = false;
+    if (note.pin) {
+      note.pin = false;
     } else {
-      noteContent.pin = true;
+      note.pin = true;
     }
 
     setNotes(notes);
-    updateLocalStorage();
     updateNotes();
     forceUpdate();
   };
@@ -83,15 +103,14 @@ function App() {
     let update = [
       ...notes,
       {
-        id: notes.length++,
+        id: notes.length,
         title: title,
         desc: desc,
         pin: pin,
       },
     ];
 
-    forceUpdate();
-    setNotes(update);
+    updateLocalStorage(update);
   };
 
   const deleteNotes = (id) => {
