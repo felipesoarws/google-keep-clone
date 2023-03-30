@@ -30,18 +30,14 @@ function App() {
   const notesMenuDetailed = useRef(null);
   const notesList = useRef(null);
   const notesList_1 = useRef(null);
+  const notesCreatorContainer = useRef(null);
   const notesContainer = useRef(null);
   const notesPinnedList = useRef(null);
   const notesNotPinnedList = useRef(null);
 
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: "teste",
-      desc: "teste",
-      pin: false,
-    },
-  ]);
+  const [search, setSearch] = useState("");
+
+  const [notes, setNotes] = useState([]);
 
   const [pinnedNotes, setPinnedNotes] = useState([]);
   const [notPinnedNotes, setNotPinnedNotes] = useState([]);
@@ -103,38 +99,6 @@ function App() {
     forceUptade();
   };
 
-  const gridView = () => {
-    notesList.current.classList.remove("list_view");
-    notesList_1.current.classList.remove("list_view");
-    notesContainer.current.classList.remove("list_view");
-    notesMenuList.current.classList.remove("list_view");
-    notesPinnedList.current.classList.remove("list_view");
-    notesNotPinnedList.current.classList.remove("list_view");
-
-    notesPinnedList.current.classList.add("grid_view");
-    notesNotPinnedList.current.classList.add("grid_view");
-    notesMenuList.current.classList.add("grid_view");
-    notesContainer.current.classList.add("grid_view");
-    notesList.current.classList.add("grid_view");
-    notesList_1.current.classList.add("grid_view");
-  };
-
-  const listView = () => {
-    notesList.current.classList.add("list_view");
-    notesList_1.current.classList.add("list_view");
-    notesContainer.current.classList.add("list_view");
-    notesMenuList.current.classList.add("list_view");
-    notesPinnedList.current.classList.add("list_view");
-    notesNotPinnedList.current.classList.add("list_view");
-
-    notesPinnedList.current.classList.remove("grid_view");
-    notesNotPinnedList.current.classList.remove("grid_view");
-    notesMenuList.current.classList.remove("grid_view");
-    notesContainer.current.classList.remove("grid_view");
-    notesList.current.classList.remove("grid_view");
-    notesList_1.current.classList.remove("grid_view");
-  };
-
   const toggleNotesMenu = () => {
     notesMenu.current.classList.toggle("disappear");
     notesMenuDetailed.current.classList.toggle("show");
@@ -169,6 +133,42 @@ function App() {
     return;
   };
 
+  const gridView = () => {
+    notesList.current.classList.remove("list_view");
+    notesList_1.current.classList.remove("list_view");
+    notesContainer.current.classList.remove("list_view");
+    notesMenuList.current.classList.remove("list_view");
+    notesPinnedList.current.classList.remove("list_view");
+    notesNotPinnedList.current.classList.remove("list_view");
+    notesCreatorContainer.current.classList.remove("list_view");
+
+    notesPinnedList.current.classList.add("grid_view");
+    notesNotPinnedList.current.classList.add("grid_view");
+    notesMenuList.current.classList.add("grid_view");
+    notesContainer.current.classList.add("grid_view");
+    notesList.current.classList.add("grid_view");
+    notesList_1.current.classList.add("grid_view");
+    notesCreatorContainer.current.classList.add("grid_view");
+  };
+
+  const listView = () => {
+    notesList.current.classList.add("list_view");
+    notesList_1.current.classList.add("list_view");
+    notesContainer.current.classList.add("list_view");
+    notesMenuList.current.classList.add("list_view");
+    notesPinnedList.current.classList.add("list_view");
+    notesNotPinnedList.current.classList.add("list_view");
+    notesNotPinnedList.current.classList.add("list_view");
+
+    notesPinnedList.current.classList.remove("grid_view");
+    notesNotPinnedList.current.classList.remove("grid_view");
+    notesMenuList.current.classList.remove("grid_view");
+    notesContainer.current.classList.remove("grid_view");
+    notesList.current.classList.remove("grid_view");
+    notesList_1.current.classList.remove("grid_view");
+    notesList_1.current.classList.remove("grid_view");
+  };
+
   return (
     <div className="App">
       <header>
@@ -192,6 +192,7 @@ function App() {
                 placeholder="Pesquisar"
                 id=""
                 ref={searchInputMobileMenu}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <div className="icon-delete" onClick={() => removeSearchInput()}>
                 <FiX />
@@ -226,6 +227,7 @@ function App() {
                 type="text"
                 placeholder="Pesquisar"
                 ref={searchInputDesktopMenu}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <div className="icon-delete" onClick={() => removeSearchInput()}>
                 <FiX />
@@ -238,14 +240,14 @@ function App() {
             </div>
             <div className="icons-grid-list">
               <div
-                className="icon-grid disappear"
+                className="icon-grid"
                 ref={iconGridView}
                 onClick={() => showGridView()}
               >
                 <BiGridAlt />
               </div>
               <div
-                className="icon-list"
+                className="icon-list disappear"
                 ref={iconListView}
                 onClick={() => showListView()}
               >
@@ -266,8 +268,8 @@ function App() {
         </div>
       </header>
       <main className="main">
-        <div className="notes list_view">
-          <div className="notes_creator" ref={notesContainer}>
+        <div className="notes list_view" ref={notesContainer}>
+          <div className="notes_creator" ref={notesCreatorContainer}>
             <form ref={notesMenu}>
               <input
                 type="text"
@@ -285,9 +287,6 @@ function App() {
                     ref={notesTitleInput}
                   />
                 </div>
-                <div className="note_fixer">
-                  <BsFillPinFill />
-                </div>
               </div>
 
               <div className="s-line">
@@ -298,9 +297,8 @@ function App() {
                 />
               </div>
               <div className="t-line">
-                <MdOutlineColorLens />
                 <div className="clone-note">
-                  <button onClick={(e) => toggleNotesMenu(this)}>Fechar</button>
+                  <button onClick={(e) => toggleNotesMenu()}>Fechar</button>
                 </div>
               </div>
             </div>
@@ -312,28 +310,35 @@ function App() {
                 {pinnedNotes.length > 0 && <h1>Marcadas</h1>}
               </div>
               <div className="list_view notes_list" ref={notesList}>
-                {notes.map((item) => {
-                  if (item.pin)
-                    return (
-                      <div
-                        className={item.id + " note list_view"}
-                        key={item.id}
-                      >
-                        <div className={item.id + " title"}>
-                          <h1>{item.title}</h1>
-                          <div
-                            className={item.id + " note_fixer"}
-                            onClick={pinNote}
-                          >
-                            <BsFillPinFill />
+                {notes
+                  .filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.title.toLowerCase().includes(search) ||
+                          item.desc.toLowerCase().includes(search);
+                  })
+                  .map((item) => {
+                    if (item.pin)
+                      return (
+                        <div
+                          className={item.id + " note list_view"}
+                          key={item.id}
+                        >
+                          <div className={item.id + " title"}>
+                            <h1>{item.title}</h1>
+                            <div
+                              className={item.id + " note_fixer"}
+                              onClick={pinNote}
+                            >
+                              <BsFillPinFill />
+                            </div>
+                          </div>
+                          <div className="desc">
+                            <p>{item.desc}</p>
                           </div>
                         </div>
-                        <div className="desc">
-                          <p>{item.desc}</p>
-                        </div>
-                      </div>
-                    );
-                })}
+                      );
+                  })}
               </div>
             </div>
             <div
@@ -345,25 +350,35 @@ function App() {
                 {notPinnedNotes.length < 1 && <h1></h1>}
               </div>
               <div className="list_view notes_list" ref={notesList_1}>
-                {notes.map((item) => {
-                  if (!item.pin)
-                    return (
-                      <div className={item.id + " note "} key={item.id}>
-                        <div className={item.id + " title"}>
-                          <h1>{item.title}</h1>
-                          <div
-                            className={item.id + " note_fixer"}
-                            onClick={pinNote}
-                          >
-                            <BsPin />
+                {notes
+                  .filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.title.toLowerCase().includes(search) ||
+                          item.desc.toLowerCase().includes(search);
+                  })
+                  .map((item) => {
+                    if (!item.pin)
+                      return (
+                        <div
+                          className={item.id + " note list_view"}
+                          key={item.id}
+                        >
+                          <div className={item.id + " title"}>
+                            <h1>{item.title}</h1>
+                            <div
+                              className={item.id + " note_fixer"}
+                              onClick={pinNote}
+                            >
+                              <BsPin />
+                            </div>
+                          </div>
+                          <div className="desc">
+                            <p>{item.desc}</p>
                           </div>
                         </div>
-                        <div className="desc">
-                          <p>{item.desc}</p>
-                        </div>
-                      </div>
-                    );
-                })}
+                      );
+                  })}
               </div>
             </div>
           </div>
