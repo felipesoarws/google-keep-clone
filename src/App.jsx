@@ -33,7 +33,7 @@ function App() {
   const notesTitleInput = useRef(null);
   const notesMenu = useRef(null);
   const notesMenuList = useRef(null);
-  const notesMenuDetailed = useRef(null);
+  const notesTaskMenuDetailed = useRef(null);
   const notesList = useRef(null);
   const notesList_1 = useRef(null);
   const notesCreatorContainer = useRef(null);
@@ -115,7 +115,7 @@ function App() {
 
   const toggleNotesListMenu = () => {
     notesMenu.current.classList.toggle("disappear");
-    notesMenuDetailed.current.classList.toggle("show");
+    notesTaskMenuDetailed.current.classList.toggle("show");
     notesMenuList.current.classList.toggle("margin");
 
     let title = notesTitleInput.current.value;
@@ -294,7 +294,7 @@ function App() {
               />
               <MdChecklistRtl />
             </form>
-            <div className="notes_creator_detailed" ref={notesMenuDetailed}>
+            <div className="notes_creator_detailed" ref={notesTaskMenuDetailed}>
               <div className="f-line">
                 <div className="note_title">
                   <input
