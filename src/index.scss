@@ -622,7 +622,8 @@ body {
                         }
                     }
 
-                    .note_fixer {
+                    .note_fixer,
+                    .note_delete {
                         z-index: 1000;
                         display: flex;
                         align-items: center;
@@ -630,6 +631,26 @@ body {
 
                         svg {
                             z-index: -1;
+                        }
+                    }
+
+                    .note_delete {
+                        width: 100%;
+                        justify-content: flex-end;
+                        cursor: pointer;
+                        opacity: 0.2;
+                        transition: all 0.3s ease-in-out;
+
+                        &:hover svg {
+                            color: white;
+                            opacity: 1;
+                        }
+
+                        svg {
+                            color: $gray;
+                            font-size: 1rem;
+                            pointer-events: none;
+                            transition: all 0.3s ease-in-out;
                         }
                     }
 

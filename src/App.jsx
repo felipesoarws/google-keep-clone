@@ -1,11 +1,17 @@
 import { useRef, useState, useReducer, useEffect } from "react";
 
 // icons
-import { BiSearchAlt2, BiCog, BiGridAlt, BiArrowBack } from "react-icons/bi";
+import {
+  BiSearchAlt2,
+  BiCog,
+  BiGridAlt,
+  BiArrowBack,
+  BiTrash,
+} from "react-icons/bi";
 import { BsArrowClockwise, BsFillGrid3X3GapFill } from "react-icons/bs";
 import { CiGrid2H } from "react-icons/ci";
 import { FiX } from "react-icons/fi";
-import { MdChecklistRtl, MdOutlineColorLens } from "react-icons/md";
+import { MdChecklistRtl } from "react-icons/md";
 import { BsFillPinFill, BsPin } from "react-icons/bs";
 
 // images
@@ -16,7 +22,7 @@ import profile_img from "./assets/me.jpeg";
 import "./App.css";
 
 function App() {
-  const [reducerValue, forceUptade] = useReducer((x) => x + 1, 0);
+  const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const searchMobileMenu = useRef(null);
   const searchInputMobileMenu = useRef(null);
@@ -55,9 +61,8 @@ function App() {
     setNotPinnedNotes(notPinned);
   };
 
-  const pinNote = (e) => {
-    const idNoteElement = e.target.parentElement;
-    const noteContent = notes[idNoteElement.classList[0] - 1];
+  const pinNote = (id) => {
+    const noteContent = notes[id - 1];
 
     if (noteContent.pin) {
       noteContent.pin = false;
@@ -67,10 +72,10 @@ function App() {
 
     setNotes(notes);
     updateNotes();
-    forceUptade();
+    forceUpdate();
   };
 
-  const createNotes = (title, desc, pin) => {
+  const createNotes = (title, desc, pin, type) => {
     const update = [
       ...notes,
       {
@@ -78,10 +83,20 @@ function App() {
         title: title,
         desc: desc,
         pin: pin,
+        type: type,
       },
     ];
 
+    forceUpdate();
     setNotes(update);
+  };
+
+  const deleteNotes = (id) => {
+    const newList = notes.filter((item) => item.id !== id);
+
+    setNotes(newList);
+    forceUpdate();
+    console.log(notes);
   };
 
   const showListView = () => {
@@ -89,7 +104,7 @@ function App() {
     iconGridView.current.classList.remove("disappear");
 
     listView();
-    forceUptade();
+    forceUpdate();
   };
   const showGridView = () => {
     iconGridView.current.classList.add("disappear");
@@ -99,7 +114,7 @@ function App() {
     forceUptade();
   };
 
-  const toggleNotesMenu = () => {
+  const toggleNotesListMenu = () => {
     notesMenu.current.classList.toggle("disappear");
     notesMenuDetailed.current.classList.toggle("show");
     notesMenuList.current.classList.toggle("margin");
@@ -111,7 +126,7 @@ function App() {
     let titleInputLength = notesTitleInput.current.value.length;
 
     if (descInputLength > 0 || titleInputLength > 0) {
-      createNotes(title, desc);
+      createNotes(title, desc, false, "task");
     }
 
     notesDescInput.current.value = "";
@@ -274,7 +289,7 @@ function App() {
               <input
                 type="text"
                 placeholder="Criar uma nota..."
-                onClick={() => toggleNotesMenu()}
+                onClick={() => toggleNotesListMenu()}
               />
               <MdChecklistRtl />
             </form>
@@ -298,7 +313,7 @@ function App() {
               </div>
               <div className="t-line">
                 <div className="clone-note">
-                  <button onClick={(e) => toggleNotesMenu()}>Fechar</button>
+                  <button onClick={(e) => toggleNotesListMenu()}>Fechar</button>
                 </div>
               </div>
             </div>
@@ -328,13 +343,19 @@ function App() {
                             <h1>{item.title}</h1>
                             <div
                               className={item.id + " note_fixer"}
-                              onClick={pinNote}
+                              onClick={(e) => pinNote(item.id)}
                             >
                               <BsFillPinFill />
                             </div>
                           </div>
                           <div className="desc">
                             <p>{item.desc}</p>
+                          </div>
+                          <div
+                            className={item.id + " note_delete"}
+                            onClick={(e) => deleteNotes(item.id)}
+                          >
+                            <BiTrash />
                           </div>
                         </div>
                       );
@@ -368,13 +389,19 @@ function App() {
                             <h1>{item.title}</h1>
                             <div
                               className={item.id + " note_fixer"}
-                              onClick={pinNote}
+                              onClick={(e) => pinNote(item.id)}
                             >
                               <BsPin />
                             </div>
                           </div>
                           <div className="desc">
                             <p>{item.desc}</p>
+                          </div>
+                          <div
+                            className={item.id + " note_delete"}
+                            onClick={(e) => deleteNotes(item.id)}
+                          >
+                            <BiTrash />
                           </div>
                         </div>
                       );
