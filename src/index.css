@@ -297,10 +297,34 @@ body header .desktop_header .f-line .search input::placeholder {
 body header .desktop_header .s-line {
   gap: 0.9rem;
 }
+body header .desktop_header .s-line .icons-grid-list .icon-grid,
+body header .desktop_header .s-line .icons-grid-list .icon-list {
+  position: relative;
+}
+body header .desktop_header .s-line .icons-grid-list .icon-grid:hover span,
+body header .desktop_header .s-line .icons-grid-list .icon-list:hover span {
+  opacity: 1;
+}
 body header .desktop_header .s-line .icons-grid-list .icon-grid.disappear,
 body header .desktop_header .s-line .icons-grid-list .icon-list.disappear {
   display: none;
   visibility: hidden;
+}
+body header .desktop_header .s-line .icons-grid-list .icon-grid span,
+body header .desktop_header .s-line .icons-grid-list .icon-list span {
+  position: absolute;
+  display: block;
+  color: white;
+  left: 50%;
+  bottom: -1rem;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  background-color: rgba(154, 160, 166, 0.3);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
 }
 body header .desktop_header .s-line .icon-update svg,
 body header .desktop_header .s-line .icon-config svg {
@@ -581,6 +605,11 @@ body main .notes_list .note .note_delete {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+}
+body main .notes_list .note .note_fixer:hover span,
+body main .notes_list .note .note_delete:hover span {
+  opacity: 1;
 }
 body main .notes_list .note .note_fixer svg,
 body main .notes_list .note .note_delete svg {
@@ -593,6 +622,9 @@ body main .notes_list .note .note_delete {
   opacity: 0.2;
   transition: all 0.3s ease-in-out;
 }
+body main .notes_list .note .note_delete:hover {
+  opacity: 1;
+}
 body main .notes_list .note .note_delete:hover svg {
   color: white;
   opacity: 1;
@@ -602,6 +634,36 @@ body main .notes_list .note .note_delete svg {
   font-size: 1rem;
   pointer-events: none;
   transition: all 0.3s ease-in-out;
+}
+body main .notes_list .note .note_delete span {
+  position: absolute;
+  display: block;
+  color: white;
+  right: -3.8rem;
+  bottom: -1.5rem;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  background-color: rgba(154, 160, 166, 0.3);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+body main .notes_list .note .note_fixer span {
+  position: absolute;
+  display: block;
+  color: white;
+  right: -2.8rem;
+  top: -1.5rem;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  background-color: rgba(154, 160, 166, 0.3);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
 }
 body main .notes_list .note .title,
 body main .notes_list .note .desc,

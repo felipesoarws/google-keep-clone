@@ -303,9 +303,31 @@ body {
                 .icons-grid-list {
                     .icon-grid,
                     .icon-list {
+                        position: relative;
+
+                        &:hover span {
+                            opacity: 1;
+                        }
+
                         &.disappear {
                             display: none;
                             visibility: hidden;
+                        }
+
+                        span {
+                            position: absolute;
+                            display: block;
+                            color: white;
+                            left: 50%;
+                            bottom: -1rem;
+                            padding: 0.2rem;
+                            border-radius: 0.2rem;
+                            transform: translateX(-50%);
+                            white-space: nowrap;
+                            font-size: 0.7rem;
+                            background-color: rgba(154, 160, 166, 0.3);
+                            transition: all 0.3s ease-in-out;
+                            opacity: 0;
                         }
                     }
                 }
@@ -628,6 +650,11 @@ body {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
+                        position: relative;
+
+                        &:hover span {
+                            opacity: 1;
+                        }
 
                         svg {
                             z-index: -1;
@@ -641,6 +668,10 @@ body {
                         opacity: 0.2;
                         transition: all 0.3s ease-in-out;
 
+                        &:hover {
+                            opacity: 1;
+                        }
+
                         &:hover svg {
                             color: white;
                             opacity: 1;
@@ -651,6 +682,40 @@ body {
                             font-size: 1rem;
                             pointer-events: none;
                             transition: all 0.3s ease-in-out;
+                        }
+
+                        span {
+                            position: absolute;
+                            display: block;
+                            color: white;
+                            right: -3.8rem;
+                            bottom: -1.5rem;
+                            padding: 0.2rem;
+                            border-radius: 0.2rem;
+                            transform: translateX(-50%);
+                            white-space: nowrap;
+                            font-size: 0.7rem;
+                            background-color: rgba(154, 160, 166, 0.3);
+                            transition: all 0.3s ease-in-out;
+                            opacity: 0;
+                        }
+                    }
+
+                    .note_fixer {
+                        span {
+                            position: absolute;
+                            display: block;
+                            color: white;
+                            right: -2.8rem;
+                            top: -1.5rem;
+                            padding: 0.2rem;
+                            border-radius: 0.2rem;
+                            transform: translateX(-50%);
+                            white-space: nowrap;
+                            font-size: 0.7rem;
+                            background-color: rgba(154, 160, 166, 0.3);
+                            transition: all 0.3s ease-in-out;
+                            opacity: 0;
                         }
                     }
 

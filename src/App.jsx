@@ -96,7 +96,6 @@ function App() {
 
     setNotes(newList);
     forceUpdate();
-    console.log(notes);
   };
 
   const showListView = () => {
@@ -260,6 +259,7 @@ function App() {
                 onClick={() => showGridView()}
               >
                 <BiGridAlt />
+                <span>Visualização em grade</span>
               </div>
               <div
                 className="icon-list disappear"
@@ -267,6 +267,7 @@ function App() {
                 onClick={() => showListView()}
               >
                 <CiGrid2H />
+                <span>Visualização em lista</span>
               </div>
             </div>
 
@@ -356,6 +357,7 @@ function App() {
                             onClick={(e) => deleteNotes(item.id)}
                           >
                             <BiTrash />
+                            <span>Apagar nota</span>
                           </div>
                         </div>
                       );
@@ -392,6 +394,7 @@ function App() {
                               onClick={(e) => pinNote(item.id)}
                             >
                               <BsPin />
+                              <span>Fixar nota</span>
                             </div>
                           </div>
                           <div className="desc">
@@ -402,6 +405,7 @@ function App() {
                             onClick={(e) => deleteNotes(item.id)}
                           >
                             <BiTrash />
+                            <span>Apagar nota</span>
                           </div>
                         </div>
                       );
