@@ -43,38 +43,22 @@ function App() {
 
   const [search, setSearch] = useState("");
 
-  const [notes, setNotes] = useState([
-    {
-      id: 0,
-      title: "teste",
-      desc: "teste",
-      pin: true,
-    },
-  ]);
+  const [savedNotes] = useState(localStorage.getItem('notes'))
+  const [notes, setNotes] = useState(
+    savedNotes ? JSON.parse(savedNotes) : []
+  );
 
   const [pinnedNotes, setPinnedNotes] = useState([]);
   const [notPinnedNotes, setNotPinnedNotes] = useState([]);
-  const [notesFromLocalStorage, setNotesFromLocalStorage] = useState([]);
 
   useEffect(() => {
-    updateLocalStorage();
-    setNotes(notesFromLocalStorage);
-    updateNotes();
+    setNotes(notes);
+    updateNotes()
   }, [reducerValue]);
 
-  const updateLocalStorage = (i) => {
-    if (i == undefined) {
-      localStorage.setItem("notes", JSON.stringify(notes));
-      const LocalStorageNotes = JSON.parse(localStorage.getItem("notes"));
-
-      setNotesFromLocalStorage(LocalStorageNotes);
-    } else {
-      const LocalStorageNotes = JSON.parse(localStorage.getItem("notes"));
-      localStorage.setItem("notes", JSON.stringify(i));
-
-      setNotesFromLocalStorage(LocalStorageNotes);
-    }
-  };
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes))
+  }, [reducerValue])
 
   const updateNotes = () => {
     const pinned = notes.filter((n) => n.pin == true);
@@ -95,7 +79,6 @@ function App() {
     }
 
     setNotes(notes);
-    updateNotes();
     forceUpdate();
   };
 
@@ -110,7 +93,8 @@ function App() {
       },
     ];
 
-    updateLocalStorage(update);
+    forceUpdate();
+    setNotes(update);
   };
 
   const deleteNotes = (id) => {
@@ -166,6 +150,7 @@ function App() {
   const removeSearchInput = () => {
     searchInputMobileMenu.current.value = "";
     searchInputDesktopMenu.current.value = "";
+    setSearch('')
     return;
   };
 
@@ -314,7 +299,6 @@ function App() {
                 placeholder="Criar uma nota..."
                 onClick={() => toggleNotesListMenu()}
               />
-              <MdChecklistRtl />
             </form>
             <div className="notes_creator_detailed" ref={notesTaskMenuDetailed}>
               <div className="f-line">
